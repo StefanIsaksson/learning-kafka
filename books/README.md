@@ -43,3 +43,21 @@ Each row entered while create a new Message to the topic **books**.
 #### 4.2 Start Kafka Consumer Console
 Open another console in Kafka home directory and run:
 `bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic books --from-beginning`
+
+#### 4.3 Start Kafka Consumer Console with Consumer Group
+Open another console in Kafka home directory and run:
+`bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic books --from-beginning` --group my_group
+
+#### 4.3.1 List Consumer Groups
+Open another console in Kafka home directory and run:
+`bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --list
+
+#### 4.3.1 Show Consumer Group Details
+Open another console in Kafka home directory and run:
+`bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --describe --group my_group
+
+#### 4.3.2 Reset offset for Consumer Group
+Open another console in Kafka home directory and run:
+`bin\windows\kafka-consumer-groups.bat --bootstrap-server localhost:9092 --reset-offsets --to-earliest --group my_group --execute --topic books
+
+#### 4.3 Try out Kafka Tool (A Kafka GUI)
