@@ -7,23 +7,23 @@ import java.util.Properties;
 
 public class BookProducerApp {
 
-    public static final String BOOTSTRAP_SERVER = "localhost:9092";
-    public static final String TOPIC = "books";
-
     public static void main(String[] args) {
 
-        final Logger logger = LoggerFactory.getLogger(BookProducerApp.class);
+        Logger logger = LoggerFactory.getLogger(BookProducerApp.class);
+
+        String bootstrapServer = "localhost:9092";
+        String topic = "books";
+        String messageKey = "id";
+        String messageValue = "Hello World Book";
 
         Properties props = new Properties();
-        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, BOOTSTRAP_SERVER);
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootstrapServer);
         props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
 
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(props);
 
-        String message = "Hello World Book";
-
-        producer.send(new ProducerRecord<String, String>(TOPIC, message), new Callback() {
+        producer.send(new ProducerRecord<String, String>(topic, messageKey, messageValue), new Callback() {
             @Override
             public void onCompletion(RecordMetadata recordMetadata, Exception e) {
                 if (e == null) {
